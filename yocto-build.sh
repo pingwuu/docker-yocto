@@ -29,6 +29,7 @@ SNAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 # check for directory architecture
 YOCTODIR="${SDIR}"
 IMAGE="coldnew/yocto-build"
+TAG="ubuntu-18.04"
 CONTAINER="yocto-build"
 DOCKER_ARGS=""
 
@@ -190,8 +191,8 @@ do
         exit $?
         ;;
     -p | --pull)
-        INFO "Pull new image: $IMAGE"
-        docker pull $IMAGE
+        INFO "Pull new image: $IMAGE:$TAG"
+        docker pull $IMAGE:$TAG
         exit $?
         ;;
     -h | --help)
@@ -251,7 +252,7 @@ do
                    $(eval echo ${DOCKER_ARGS}) \
                    --name=$CONTAINER \
                    --net=host \
-                   $IMAGE
+                   $IMAGE:$TAG
         fi
         exit $?
         ;;
