@@ -250,6 +250,7 @@ do
                    --env=USER=${USER} \
                    $(eval echo ${DOCKER_ARGS}) \
                    --name=$CONTAINER \
+                   --net=host \
                    $IMAGE
         fi
         exit $?
