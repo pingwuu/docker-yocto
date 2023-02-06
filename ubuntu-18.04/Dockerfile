@@ -87,6 +87,9 @@ RUN DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 # Extra packages I want
 RUN apt-get install -y rsync fakeroot fakechroot libpython2.7 python-setuptools
 
+# Install netcat-openbsd
+RUN apt-get install -y netcat-openbsd
+
 # default workdir is /yocto
 WORKDIR /yocto
 
