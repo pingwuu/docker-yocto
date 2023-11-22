@@ -3,7 +3,7 @@
 # Author:  Ping Wu
 # Command format: Instruction [arguments / command] ..
 
-FROM ubuntu:20.04
+FROM ubuntu:19.04
 MAINTAINER Ping Wu
 
 # check env
@@ -16,10 +16,11 @@ ENV TZ=Asia/Shanghai
 # using mirrors for apt
 RUN \
  mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
-#echo "deb [arch=amd64] http://download.docker.com/linux/ubuntu focal stable" >> /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse" > /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+ echo "deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ disco main restricted universe multiverse" > /etc/apt/sources.list && \
+ echo "deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ disco-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ disco-security main restricted universe multiverse" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu// disco-backports main restricted universe multiverse" >> /etc/apt/sources.list
+
 RUN cat /etc/apt/sources.list
 
 # Add 32bit package in package list
