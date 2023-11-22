@@ -34,7 +34,7 @@ RUN apt-get update -y
 # Essentials
 RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
      build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
-     xz-utils debianutils iputils-ping vim bc g++-multilib bash
+     xz-utils debianutils iputils-ping vim bc g++-multilib bash sudo
 
 # Graphical and Eclipse Plug-In Extras
 RUN apt-get install -y libsdl1.2-dev xterm
@@ -43,7 +43,7 @@ RUN apt-get install -y libsdl1.2-dev xterm
 RUN apt-get install -y make xsltproc docbook-utils fop dblatex xmlto
 
 # OpenEmbedded Self-Test
-RUN apt-get install -y python-git
+#RUN apt-get install -y python-git
 
 # Extra package for build with NXP's images
 RUN apt-get install -y \
@@ -70,6 +70,7 @@ RUN chmod a+x /usr/bin/repo
 #  rm -rf /var/cache/oracle-jdk11-installer-local
 
 # Set the locale, else yocto will complain
+RUN apt-get install -y locales
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
