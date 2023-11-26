@@ -1,25 +1,34 @@
 # This dockerfile uses the ubuntu image
 # VERSION 0 - EDITION 1
-# Author:  Ping Wu
+# Author:  Yen-Chin, Lee <yenchin@weintek.com>
+# Modified: Ping Wu
 # Command format: Instruction [arguments / command] ..
 
-FROM ubuntu:20.04
-MAINTAINER Ping Wu
+FROM ubuntu:22.04
+MAINTAINER Yen-Chin, Lee, coldnew.tw@gmail.com
+MAINTAINER Ping Wu, pingwu@mail.ustc.edu.cn
 
-# check env
+# Check env
 RUN env
 
 # Set TimeZone
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Shanghai
 
-# using mirrors for apt
+# Using mirrors for apt
 RUN \
  mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
-#echo "deb [arch=amd64] http://download.docker.com/linux/ubuntu focal stable" >> /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse" > /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
- echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted" > /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy universe" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-updates universe" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy multiverse" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-updates multiverse" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-security universe" >> /etc/apt/sources.list && \
+ echo "deb http://mirrors.aliyun.com/ubuntu/ jammy-security multiverse" >> /etc/apt/sources.list
+
 RUN cat /etc/apt/sources.list
 
 # Add 32bit package in package list
@@ -33,14 +42,14 @@ RUN apt-get update -y
 
 # Essentials
 RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
-     build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
-     xz-utils debianutils iputils-ping vim bc g++-multilib bash sudo
+     build-essential chrpath socat cpio python2 python3 python3-pip python3-pexpect \
+     xz-utils debianutils iputils-ping vim bc g++-multilib bash sudo flex bison
 
 # Graphical and Eclipse Plug-In Extras
 RUN apt-get install -y libsdl1.2-dev xterm
 
 # Documentation
-RUN apt-get install -y make xsltproc docbook-utils fop dblatex xmlto
+#RUN apt-get install -y make xsltproc docbook-utils fop dblatex xmlto
 
 # OpenEmbedded Self-Test
 #RUN apt-get install -y python-git
@@ -48,7 +57,7 @@ RUN apt-get install -y make xsltproc docbook-utils fop dblatex xmlto
 # Extra package for build with NXP's images
 RUN apt-get install -y \
     sed cvs subversion coreutils texi2html \
-    python-pysqlite2 help2man  gcc g++ \
+     help2man  gcc g++ \
     desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial \
     autoconf automake groff curl lzop asciidoc u-boot-tools busybox
 
@@ -89,3 +98,4 @@ WORKDIR /yocto
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+

@@ -3,6 +3,7 @@
 #
 # Copyright (C) 2019 coldnew
 # Authored-by:  Yen-Chin, Lee <coldnew.tw@gmail.com>
+# Modified-by:  Ping Wu <pingwu@mail.ustc.edu.cn>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as
@@ -29,7 +30,7 @@ SNAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 # check for directory architecture
 YOCTODIR="${SDIR}"
 IMAGE="pingwuu/yocto-build"
-TAG="ubuntu-20.04"
+TAG="ubuntu-22.04"
 CONTAINER="yocto-build"
 DOCKER_ARGS=""
 
@@ -185,7 +186,7 @@ do
     case "$1" in
     -u | --upgrade)
         INFO "Upgrade script $NAME"
-        curl https://raw.githubusercontent.com/pingwuu/docker-yocto/ubuntu-19.04/yocto-build.sh > /tmp/$SNAME
+        curl https://raw.githubusercontent.com/pingwuu/docker-yocto/ubuntu-22.04/yocto-build.sh > /tmp/$SNAME
         mv /tmp/$SNAME $SDIR/$SNAME
         chmod +x $SDIR/$SNAME
         exit $?
