@@ -30,7 +30,7 @@ SNAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 # check for directory architecture
 YOCTODIR="${SDIR}"
 IMAGE="pingwuu/yocto-build"
-TAG="ubuntu-22.04"
+TAG="ubuntu-22.04_vlc_v0.2"
 CONTAINER="yocto-build"
 DOCKER_ARGS=""
 
