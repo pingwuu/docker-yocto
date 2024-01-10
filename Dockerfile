@@ -41,7 +41,8 @@ RUN apt-get update -y
 # http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html
 
 # Essentials
-RUN apt-get install -y curl wget sudo vim
+RUN apt-get install -y build-essential curl wget sudo vim net-tools file git subversion
+
 #RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
 #     build-essential chrpath socat cpio python2 python3 python3-pip python3-pexpect \
 #     xz-utils debianutils iputils-ping vim bc g++-multilib bash sudo flex bison
@@ -87,14 +88,18 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Extra package for VLC
-RUN apt-get install -y net-tools openssh-server gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 mingw-w64-tools \
-  lua5.2 libtool automake autoconf autopoint make gettext pkg-config \
-  git subversion cmake cvs wget bzip2 file \
-  libwine-dev wine zip p7zip nsis bzip2 \
-  yasm ragel ant default-jdk protobuf-compiler dos2unix vim \
-  ninja-build gperf python3 libfftw3-3 nasm qtbase5-dev libfuse2 \
-  meson gtk-doc-tools python-is-python3 flex bison python3.10-venv \
-  texinfo
+#RUN apt-get install -y net-tools openssh-server gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 mingw-w64-tools \
+#  lua5.2 libtool automake autoconf autopoint make gettext pkg-config \
+#  git subversion cmake cvs wget bzip2 file \
+#  libwine-dev wine zip p7zip nsis bzip2 \
+#  yasm ragel ant default-jdk protobuf-compiler dos2unix vim \
+#  ninja-build gperf python3 libfftw3-3 nasm qtbase5-dev libfuse2 \
+#  meson gtk-doc-tools python-is-python3 flex bison python3.10-venv \
+#  texinfo
+
+# Extra package for buildroot
+RUN apt-get install -y make cmake flex bison python3 sed binutils diffutils patch gzip bzip2 perl tar cpio unzip rsync bc findutils wget \
+    libssl-dev uuid uuid-dev gnutls-dev
 
 #RUN apt-get install -y net-tools openssh-server \
 #  git wget bzip2 file libwine-dev unzip libtool libtool-bin libltdl-dev pkg-config ant \
